@@ -7,9 +7,9 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 {
     public class DatabaseContext
     {
-        List<User> users;
+        public IEnumerable<User> users {get; set;}
 
-        public DatabaseContext(string id, string name, string email, string password)
+        public DatabaseContext()
         {
             users = [
 
