@@ -23,4 +23,15 @@ public class UserRepository : IUserRepository
     {
         return _users.Append(user);
     }
+    public IEnumerable<User> DeleteOne(string id)
+    {
+        _users = _users.Where(u => u.Id != id);
+        return _users;
+    }
+    // public IEnumerable<User> FindOne(string id)
+    // {
+    //     _users = _users.Where(u => u.Id == id);
+    //     return _users;
+
+    // }
 }
