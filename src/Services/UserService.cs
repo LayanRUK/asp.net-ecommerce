@@ -18,5 +18,8 @@ public class UserService : IUserService
     {
         return _userRepository.GetAll();
     }
-
+    public IEnumerable<User> CreateOne(User user)
+    {
+        return _userRepository.CreateOne(user);
+    }
 }

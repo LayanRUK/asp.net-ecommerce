@@ -19,5 +19,10 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         {
             return _userService.GetAll();
         }
+        [HttpPost]
+        public IEnumerable<User> CreateOne(User user)
+        {
+            return _userService.CreateOne(user);
+        }
     }
 }

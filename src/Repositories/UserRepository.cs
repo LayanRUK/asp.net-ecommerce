@@ -8,7 +8,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private IEnumerable<User> _users { get; }
+    private IEnumerable<User> _users { get; set; }
     private DatabaseContext _databaseContext;
     public UserRepository()
     {
@@ -19,5 +19,8 @@ public class UserRepository : IUserRepository
     {
         return _users;
     }
-
+    public IEnumerable<User> CreateOne(User user)
+    {
+        return _users.Append(user);
+    }
 }
