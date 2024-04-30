@@ -9,5 +9,5 @@ public interface IUserRepository
     public IEnumerable<User> GetAll();
     public IEnumerable<User> CreateOne(User user);
     public IEnumerable<User> DeleteOne(string id);
-    // public IEnumerable<User> FindOne(string id);
+    public IEnumerable<User> FindOne(string id);
 }

@@ -24,16 +24,16 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         {
             return _userService.CreateOne(user);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IEnumerable<User> DeleteOne(string id)
         {
             return _userService.DeleteOne(id);
         }
-        // [HttpGet]
-        // public IEnumerable<User> FindOne(string id)
-        // {
-        //     return _userService.FindOne(id);
-        // }
+        [HttpGet("{id}")]
+        public IEnumerable<User> FindOne(string id)
+        {
+            return _userService.FindOne(id);
+        }
 
     }
 }

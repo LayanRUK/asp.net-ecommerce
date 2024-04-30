@@ -28,10 +28,9 @@ public class UserRepository : IUserRepository
         _users = _users.Where(u => u.Id != id);
         return _users;
     }
-    // public IEnumerable<User> FindOne(string id)
-    // {
-    //     _users = _users.Where(u => u.Id == id);
-    //     return _users;
-
-    // }
+    public IEnumerable<User> FindOne(string id)
+    {
+        _users = _users.Where(u => u.Id == id);
+        return _users;
+    }
 }

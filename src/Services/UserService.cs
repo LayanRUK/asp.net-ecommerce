@@ -26,10 +26,10 @@ public class UserService : IUserService
     {
         return _userRepository.DeleteOne(id);
     }
-    // public IEnumerable<User> FindOne(string id)
-    // {
-    //     return _userRepository.FindOne(id);
-    // }              
+    public IEnumerable<User> FindOne(string id)
+    {
+        return _userRepository.FindOne(id);
+    }
 
-   
+
 }
