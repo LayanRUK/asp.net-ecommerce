@@ -23,12 +23,12 @@ public class UserRepository : IUserRepository
     {
         return _users.Append(user);
     }
-    public IEnumerable<User> DeleteOne(string id)
+    public IEnumerable<User> DeleteOne(Guid id)
     {
         _users = _users.Where(u => u.Id != id);
         return _users;
     }
-    public IEnumerable<User> FindOne(string id)
+    public IEnumerable<User> FindOne(Guid id)
     {
         _users = _users.Where(u => u.Id == id);
         return _users;

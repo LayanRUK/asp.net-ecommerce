@@ -20,17 +20,17 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _userService.GetAll();
         }
         [HttpPost]
-        public IEnumerable<User> CreateOne(User user)
+        public IEnumerable<User> CreateOne( [FromBody]User user)
         {
             return _userService.CreateOne(user);
         }
         [HttpDelete("{id}")]
-        public IEnumerable<User> DeleteOne(string id)
+        public IEnumerable<User> DeleteOne(Guid id)
         {
             return _userService.DeleteOne(id);
         }
         [HttpGet("{id}")]
-        public IEnumerable<User> FindOne(string id)
+        public IEnumerable<User> FindOne(Guid id)
         {
             return _userService.FindOne(id);
         }
