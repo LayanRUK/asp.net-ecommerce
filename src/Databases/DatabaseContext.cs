@@ -13,11 +13,11 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
         {
             users = [
 
-            new User ("1","sarah","sarah@gmail.com ", "sarah1"),
+            new User ("sarah","sarah@gmail.com ", "sarah1"),
 
-            new User ("2","lama","lama@gmail.com ", "lama2"),
+            new User ("lama","lama@gmail.com ", "lama2"),
 
-            new User ("3","layan","layan@gmail.com ", "layan3"),
+            new User ("layan","layan@gmail.com ", "layan3"),
 
             ];
 

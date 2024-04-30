@@ -22,4 +22,14 @@ public class UserService : IUserService
     {
         return _userRepository.CreateOne(user);
     }
+    public IEnumerable<User> DeleteOne(Guid id)
+    {
+        return _userRepository.DeleteOne(id);
+    }
+    public IEnumerable<User> FindOne(Guid id)
+    {
+        return _userRepository.FindOne(id);
+    }
+
+
 }

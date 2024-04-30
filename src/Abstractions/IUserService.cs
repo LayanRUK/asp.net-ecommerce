@@ -8,5 +8,8 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions
     {
         public IEnumerable<User> GetAll();
         public IEnumerable<User> CreateOne(User user);
+        public IEnumerable<User> DeleteOne(Guid id);
+        // FindOne
+        public IEnumerable<User> FindOne(Guid id);
     }
 }
