@@ -3,5 +3,6 @@
 bin
 obj
 *.http
-
+order/entity
 .fake
+appsettings.json
