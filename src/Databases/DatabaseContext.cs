@@ -1,8 +1,20 @@
+
+public class DatabaseContext
+{
+
+    public IEnumerable<Order> orders { get; set; }
+
+
+    public DatabaseContext()
+    {
+        orders = [
+new Order("1","123","132",0506636619,"67"),
+        ];
+    }
 Product/entity
 using System.Collections.Generic;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
-
 namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 {
    public class DatabaseContext
@@ -41,5 +53,5 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 
         }
     }
-main
+
 }
