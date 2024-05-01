@@ -3,5 +3,5 @@
 bin
 obj
 *.http
-
 .fake
+appsettings.json
