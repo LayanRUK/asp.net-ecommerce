@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
+
 namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 
 [ApiController]
@@ -7,8 +8,6 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 
 public abstract class BaseController : ControllerBase
 {
-
-
 
 
 
