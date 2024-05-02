@@ -16,6 +16,26 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
          public IEnumerable<Product> GetAll()
           {
             return _productService.GetAll();
+
+         }
+          [HttpPost]
+         public IEnumerable<Product> CreateOne(Product product)
+          {
+            return _productService.CreateOne(product);
+            
+         } 
+         [HttpDelete("{id}")]
+         public IEnumerable<Product> DeleteOne(Guid id)
+          {
+            return _productService.DeleteOne( id);
+            
+         }
+          
+         public IEnumerable<Product> FindOne(Guid id)
+          {
+            return _productService.FindOne( id);
+           
+
          }
     }
 }
