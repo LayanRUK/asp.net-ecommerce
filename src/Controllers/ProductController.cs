@@ -30,7 +30,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productService.DeleteOne( id);
             
          }
-          
+          [HttpGet("{id}")]
          public IEnumerable<Product> FindOne(Guid id)
           {
             return _productService.FindOne( id);

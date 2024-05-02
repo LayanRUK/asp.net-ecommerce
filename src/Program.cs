@@ -2,7 +2,6 @@ using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -36,5 +35,4 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
-
 app.Run();

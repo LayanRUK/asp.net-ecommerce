@@ -23,12 +23,12 @@ public class OrderController : BaseController
 
 
     }
-
+    [HttpDelete("{id}")]
     public IEnumerable<Order> DeleteOne(Guid id)
     {
         return _orderService.DeleteOne(id);
     }
-
+    [HttpGet("{id}")]
     public IEnumerable<Order> FindOne(Guid id)
     {
 
