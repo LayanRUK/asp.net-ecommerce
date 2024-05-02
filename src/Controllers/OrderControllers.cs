@@ -23,11 +23,19 @@ public class OrderController : BaseController
 
 
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5458acbd8be8e010bc94aff40b5c93c065ba3ead
     [HttpDelete("{id}")]
     public IEnumerable<Order> DeleteOne(Guid id)
     {
         return _orderService.DeleteOne(id);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5458acbd8be8e010bc94aff40b5c93c065ba3ead
     [HttpGet("{id}")]
     public IEnumerable<Order> FindOne(Guid id)
     {

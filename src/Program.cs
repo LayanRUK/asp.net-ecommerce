@@ -2,6 +2,11 @@ using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 5458acbd8be8e010bc94aff40b5c93c065ba3ead
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
