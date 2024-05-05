@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+using sda_onsite_2_csharp_backend_teamwork.src.Utils;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
 {
@@ -27,7 +28,8 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             // always return only one i create it 
             if (user is not null)
             {
-                _userService.CreateOne(user);
+
+                var createdUser = _userService.CreateOne(user);
                 return CreatedAtAction(nameof(CreateOne), user);
             }
             return BadRequest();
