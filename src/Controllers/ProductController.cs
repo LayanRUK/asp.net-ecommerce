@@ -8,45 +8,8 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
     private IProductService _productService;
     public ProductController(IProductService productService)
     {
-<<<<<<< HEAD
-        private IProductService _productService;
-        public ProductController(IProductService productService)
-        {
-            _productService = productService;
-        }
-    
-        
-         [HttpGet]
-         public IEnumerable<Product> GetAll()
-          {
-            return _productService.GetAll();
-
-         }
-          [HttpPost]
-         public IEnumerable<Product> CreateOne(Product product)
-          {
-            return _productService.CreateOne(product);
-            
-         } 
-         [HttpDelete("{id}")]
-         public IEnumerable<Product> DeleteOne(Guid id)
-          {
-            return _productService.DeleteOne( id);
-            
-         }
-          [HttpGet("{id}")]
-         public IEnumerable<Product> FindOne(Guid id)
-          {
-            return _productService.FindOne( id);
-           
-
-         }
-=======
       _productService = productService;
->>>>>>> 5458acbd8be8e010bc94aff40b5c93c065ba3ead
     }
-
-`
 
     [HttpGet]
     public IEnumerable<Product> GetAll()

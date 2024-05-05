@@ -3,8 +3,8 @@ using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
 
 
-namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
-{
+namespace sda_onsite_2_csharp_backend_teamwork.src.Databases;
+
 
     public class DatabaseContext
 
@@ -12,6 +12,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
         public IEnumerable<Order> orders { get; set; }
         public IEnumerable<Product> products;
         public IEnumerable<User> users { get; set; }
+
         public DatabaseContext()
         {
             orders = [
@@ -33,13 +34,13 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
             new User ("layan","layan@gmail.com ", "layan3"),
             ];
             
-        Order_Items = [  new Order_Item ("1",77.7,5,7)];
+      
 
     }}
 
-    }
-
-        }
     
-}
+
+        
+    
+
 
