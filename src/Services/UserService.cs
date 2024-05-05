@@ -1,7 +1,9 @@
 
 
 using System.Text;
+using AutoMapper;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.Utils;
 
@@ -11,11 +13,13 @@ public class UserService : IUserService
 {
     private IUserRepository _userRepository;
     private IConfiguration _config;
-
-    public UserService(IUserRepository userRepository, IConfiguration config)
+    private IMapper _mapper;
+    public UserService(IUserRepository userRepository, IConfiguration config, IMapper mapper)
     {
         _userRepository = userRepository;
         _config = config;
+
+        _mapper = mapper;
     }
 
     public IEnumerable<User> GetAll()
@@ -33,9 +37,11 @@ public class UserService : IUserService
     {
         return _userRepository.DeleteOne(id);
     }
-    public IEnumerable<User> FindOne(Guid id)
+    public UserReadDto FindOne(string email)
     {
-        return _userRepository.FindOne(id);
+        var user = _userRepository.FindOne(email);
+        var userRead = _mapper.Map<UserReadDto>(user);
+        return userRead;
     }
 
 
