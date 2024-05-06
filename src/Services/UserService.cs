@@ -22,22 +22,34 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public IEnumerable<User> GetAll()
+    public List<UserReadDto> GetAll()
     {
-        return _userRepository.GetAll();
+        
+       var users =   _userRepository.GetAll();
+       var userRead = users.Select(_mapper.Map<UserReadDto>);
+       return userRead.ToList();
     }
-    public IEnumerable<User> CreateOne(User user)
+    public User? CreateOne(UserCreateDto userCreateDto)
     {
+        // map userCreateDto to user 
+        var user  = _mapper.Map<User>(userCreateDto); 
+        
+        User? foundUser = _userRepository.FindOne(user.Email);
+        if ( foundUser is not null )
+        {
+            return null;
+        }
+        
         byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);
         PasswordUtils.HashPassword(user.Password, out string hashedPassword, pepper);
         user.Password = hashedPassword;
         return _userRepository.CreateOne(user);
     }
-    public IEnumerable<User> DeleteOne(Guid id)
-    {
-        return _userRepository.DeleteOne(id);
-    }
-    public UserReadDto FindOne(string email)
+    // public IEnumerable<User> DeleteOne(Guid id)
+    // {
+    //     return _userRepository.DeleteOne(id);
+    // }
+     public UserReadDto FindOne(string email)
     {
         var user = _userRepository.FindOne(email);
         var userRead = _mapper.Map<UserReadDto>(user);
