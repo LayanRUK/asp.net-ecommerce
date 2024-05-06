@@ -17,29 +17,27 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
             orders = [
             new Order("1","123","132",0506636619,"67"),
         ];
-           
-        products = new List<Product>
+
+            products = new List<Product>
         {
             new Product( "Product1", 200 , 1, " "),
             new Product( "Product2", 200 , 2," ")
         };
 
 
-        users = [
+            users = [
 
-          new User ("sarah","sarah@gmail.com ", "sarah1"),
+              new User ("sarah","sarah@gmail.com ", "sarah1"),
 
             new User ("lama","lama@gmail.com ", "lama2"),
             new User ("layan","layan@gmail.com ", "layan3"),
             ];
-            
-        Order_Items = [  new Order_Item ("1",77.7,5,7)];
 
-    }}
+
+        }
 
     }
 
-        }
-    
 }
+
 
