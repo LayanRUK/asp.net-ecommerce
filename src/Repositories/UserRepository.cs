@@ -27,9 +27,9 @@ public class UserRepository : IUserRepository
         _users = _users.Where(u => u.Id != id);
         return _users;
     }
-    public IEnumerable<User> FindOne(Guid id)
+    public User? FindOne(string email)
     {
-        _users = _users.Where(u => u.Id == id);
-        return _users;
+        var userFound = _users.FirstOrDefault(u => u.Email == email);
+        return userFound;
     }
 }

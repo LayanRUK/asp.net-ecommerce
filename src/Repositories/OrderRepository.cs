@@ -9,14 +9,14 @@ public class OrderRepository : IOrderRepository
 {
 
     private IEnumerable<Order> _orders { get; set; }
-    private DatabaseContext  _databaseContext;
+    private DatabaseContext _databaseContext;
 
 
 
-    public OrderRepository()
+    public OrderRepository(DatabaseContext databaseContext)
     {
-        _databaseContext = new DatabaseContext();
-        _orders = _databaseContext.orders;
+        _databaseContext = databaseContext;
+        _orders = databaseContext.orders;
 
     }
 
