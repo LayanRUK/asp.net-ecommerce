@@ -1,7 +1,9 @@
 
 using Microsoft.AspNetCore.Mvc;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+using sda_onsite_2_csharp_backend_teamwork.src.Utils;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
 {
@@ -15,32 +17,47 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             _userService = userService;
         }
         [HttpGet]
-        public IEnumerable<User> GetAll()
+        public List<UserReadDto> GetAll()
         {
             return _userService.GetAll();
         }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<IEnumerable<User>> CreateOne([FromBody] User user)
+        public ActionResult<User> CreateOne([FromBody] UserCreateDto user)
         {
             // always return only one i create it 
             if (user is not null)
             {
-                _userService.CreateOne(user);
+
+                var createdUser = _userService.CreateOne(user);
                 return CreatedAtAction(nameof(CreateOne), user);
             }
             return BadRequest();
         }
-        [HttpDelete("{id}")]
-        public IEnumerable<User> DeleteOne(Guid id)
+        // [HttpDelete("{id}")]
+        // public IEnumerable<User> DeleteOne(Guid id)
+        // {
+        //     return _userService.DeleteOne(id);
+        // }
+        [HttpGet("{email}")]
+        public UserReadDto FindOne(string email)
         {
-            return _userService.DeleteOne(id);
+            return _userService.FindOne(email);
         }
-        [HttpGet("{id}")]
-        public IEnumerable<User> FindOne(Guid id)
+         [HttpPost("/test")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<User> CreateOneTest([FromBody] UserCreateDto userCreate)
         {
-            return _userService.FindOne(id);
+            // always return only one i create it 
+            if (userCreate is not null)
+            {
+
+                var createdUser = _userService.CreateOne(userCreate);
+                return CreatedAtAction(nameof(CreateOne), userCreate);
+            }
+            return BadRequest();
         }
 
     }
