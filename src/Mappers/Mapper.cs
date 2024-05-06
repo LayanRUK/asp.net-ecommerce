@@ -15,6 +15,8 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Mappers
         {
             CreateMap<User, UserReadDto>();
             CreateMap<UserReadDto, User>();
+            CreateMap<UserCreateDto, User>();
+            CreateMap<User, UserCreateDto>();
         }
     }
 }

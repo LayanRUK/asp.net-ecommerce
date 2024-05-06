@@ -1,35 +1,45 @@
 
 
+using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+
+
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
+
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private IEnumerable<User> _users { get; set; }
+    private DbSet<User> _users { get; set; }
     private DatabaseContext _databaseContext;
-    public UserRepository()
+    public UserRepository(DatabaseContext databaseContext)
     {
-        _databaseContext = new DatabaseContext();
-        _users = _databaseContext.users;
+        _databaseContext = databaseContext; 
+        _users = _databaseContext.Users;
     }
-    public IEnumerable<User> GetAll()
+    public IEnumerable<User>GetAll()
     {
         return _users;
     }
-    public IEnumerable<User> CreateOne(User user)
+    public User CreateOne(User user)
     {
-        return _users.Append(user);
+        
+        _users.Add(user);
+
+        return user;
+
     }
-    public IEnumerable<User> DeleteOne(Guid id)
+    // public IEnumerable<User> DeleteOne(Guid id)
+    // {
+    //     _users = _users.Where(u => u.Id != id);
+    //     return _users;
+    // }
+    public User FindOne(string email)
     {
-        _users = _users.Where(u => u.Id != id);
-        return _users;
-    }
-    public User? FindOne(string email)
-    {
-        var userFound = _users.FirstOrDefault(u => u.Email == email);
-        return userFound;
+         return  _users.FirstOrDefault(u => u.Email == email);
+   
     }
 }

@@ -1,5 +1,10 @@
 using System.Collections.Generic;
+
+
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
+
 using Microsoft.EntityFrameworkCore;
+
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
 
@@ -8,30 +13,20 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases;
 
 
     public class DatabaseContext : DbContext
-
     {
-        public DbSet<Order> orders { get; set; }
-        public DbSet<Order_Item> orderItems { get; set; }
-        public DbSet<Product> products {get;set; }
-        public IEnumerable<User> users { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Product> Products {get; set;}
+        public DbSet<User> Users { get; set; }
+
 
         private IConfiguration _config;
-        public DatabaseContext()
-        {
 
-         
+        
+     
+        public DatabaseContext(DbContextOptions options,  IConfiguration config) : base(options)
 
-            users = [
-
-              new User ("sarah","sarah@gmail.com ", "sarah1"),
-
-            new User ("lama","lama@gmail.com ", "lama2"),
-            new User ("layan","layan@gmail.com ", "layan3"),
-            ];
-
-
-        }
-        public DatabaseContext(IConfiguration config)
         {
             _config = config;
 
@@ -43,6 +38,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases;
            .UseSnakeCaseNamingConvention();
         }
 
+    
     }
 
 
