@@ -13,10 +13,10 @@ public class OrderRepository : IOrderRepository
 
 
 
-    public OrderRepository()
+    public OrderRepository(DatabaseContext databaseContext)
     {
-        _databaseContext = new DatabaseContext();
-        _orders = _databaseContext.orders;
+        _databaseContext = databaseContext;
+        _orders = databaseContext.orders;
 
     }
 

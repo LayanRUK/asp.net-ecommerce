@@ -10,10 +10,10 @@ public class Order_ItemRepository : IOrder_ItemRepository
     private IEnumerable<Order_Item> _order_items { get; set; }
     private DatabaseContext _databaseContext;
 
-    public Order_ItemRepository()
+    public Order_ItemRepository(DatabaseContext databaseContext)
     {
-        _databaseContext = new DatabaseContext();
-        _order_items = _databaseContext.Order_Items;
+        _databaseContext = databaseContext;
+        _order_items = databaseContext.orderItems;
     }
     public IEnumerable<Order_Item> GetAll()
     {
