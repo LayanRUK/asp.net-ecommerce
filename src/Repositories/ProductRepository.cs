@@ -10,11 +10,12 @@ public class ProductRepository : IProductRepository
 {
   private IEnumerable<Product> _products { get; set; }
   private DatabaseContext _databaseContext;
-  public ProductRepository()
-  {
-    _databaseContext = new DatabaseContext();
-    _products = _databaseContext.products;
-  }
+  public ProductRepository(DatabaseContext databaseContext)
+    {
+        _databaseContext = databaseContext;
+        _products = databaseContext.products;
+
+    }
   public IEnumerable<Product> GetAll()
   {
     return _products;
