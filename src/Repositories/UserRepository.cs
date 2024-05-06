@@ -1,6 +1,7 @@
 
 
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
@@ -9,14 +10,14 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private List<User> _users { get; set; }
+    private DbSet<User> _users { get; set; }
     private DatabaseContext _databaseContext;
-    public UserRepository()
+    public UserRepository(DatabaseContext databaseContext)
     {
-        _databaseContext = new DatabaseContext();
-        _users = _databaseContext.users;
+        _databaseContext = databaseContext; 
+        _users = _databaseContext.Users;
     }
-    public List<User>GetAll()
+    public IEnumerable<User>GetAll()
     {
         return _users;
     }
