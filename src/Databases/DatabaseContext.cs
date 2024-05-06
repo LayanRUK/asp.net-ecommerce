@@ -12,20 +12,12 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
     {
         public DbSet<Order> orders { get; set; }
         public DbSet<Order_Item> orderItems { get; set; }
-        public IEnumerable<Product> products;
+        public DbSet<Product> products;
         public IEnumerable<User> users { get; set; }
 
         private IConfiguration _config;
         public DatabaseContext()
         {
-
-            products = new List<Product>
-        {
-            new Product( "Product1", 200 , 1, " "),
-            new Product( "Product2", 200 , 2," ")
-        };
-
-
             users = [
 
               new User ("sarah","sarah@gmail.com ", "sarah1"),
@@ -33,8 +25,6 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
             new User ("lama","lama@gmail.com ", "lama2"),
             new User ("layan","layan@gmail.com ", "layan3"),
             ];
-
-
         }
         public DatabaseContext(IConfiguration config)
         {
