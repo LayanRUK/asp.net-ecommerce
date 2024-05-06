@@ -1,10 +1,11 @@
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+
+namespace sda_onsite_2_csharp_backend_teamwork.src.Entities;
 public class Order
 {
     public Guid Id { get; set; }
-    public string User_id { get; set; }
-    public string Created_at { get; set; }
-    public string Address_id { get; set; }
-    public int Phone_number { get; set; }
-    public string Payment_id { get; set; }
+    public Guid UserId { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public int PhoneNumber { get; set; }
 
 }
