@@ -1,6 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
-main
+
 namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 
 [ApiController]
@@ -13,5 +13,5 @@ public abstract class BaseController : ControllerBase
 }
 
 
-}
+
 
