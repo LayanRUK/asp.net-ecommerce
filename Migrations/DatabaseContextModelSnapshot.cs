@@ -142,15 +142,12 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("OrderItem", b =>
                 {
-
                     b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", "Order")
-
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_order_items_orders_order_id");
-
 
                     b.HasOne("Product", "Product")
                         .WithMany()
@@ -167,12 +164,13 @@ namespace Backend.Migrations
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", b =>
                 {
                     b.HasOne("User", "User")
-
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_orders_users_user_id");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("User", b =>

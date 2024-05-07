@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+using sda_onsite_2_sharp_backend_teamwork.src.DTOs;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Mappers
 {
@@ -17,6 +18,12 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Mappers
             CreateMap<UserReadDto, User>();
             CreateMap<UserCreateDto, User>();
             CreateMap<User, UserCreateDto>();
+
+            CreateMap<Product, ProductReadDto>();
+            CreateMap<ProductReadDto, Product>();
+            CreateMap<ProductCreateDto, Product>();
+            CreateMap<Product, ProductCreateDto>();
+
         }
     }
 }

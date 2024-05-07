@@ -12,7 +12,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240507090457_InitialCreate")]
+    [Migration("20240507091957_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
