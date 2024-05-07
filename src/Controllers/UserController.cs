@@ -24,11 +24,13 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> CreateOne([FromBody] UserCreateDto user)
+        public ActionResult<UserReadDto> CreateOne([FromBody] UserCreateDto user)
         {
             // always return only one i create it 
             if (user is not null)
             {
+                Console.WriteLine($"Receive user data");
+                
 
                 var createdUser = _userService.CreateOne(user);
                 return CreatedAtAction(nameof(CreateOne), user);

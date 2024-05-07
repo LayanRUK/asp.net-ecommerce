@@ -29,21 +29,27 @@ public class UserService : IUserService
        var userRead = users.Select(_mapper.Map<UserReadDto>);
        return userRead.ToList();
     }
-    public User? CreateOne(UserCreateDto userCreateDto)
+    public UserReadDto CreateOne(UserCreateDto userCreateDto)
     {
+
         // map userCreateDto to user 
         var user  = _mapper.Map<User>(userCreateDto); 
         
         User? foundUser = _userRepository.FindOne(user.Email);
         if ( foundUser is not null )
         {
-            return null;
+           return null;  
         }
+        Console.WriteLine($"Hash password");
         
         byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);
         PasswordUtils.HashPassword(user.Password, out string hashedPassword, pepper);
         user.Password = hashedPassword;
-        return _userRepository.CreateOne(user);
+        Console.WriteLine($"{hashedPassword}");
+        
+          var userCreate = _userRepository.CreateOne(user);
+          return _mapper.Map<UserReadDto>(userCreate); 
+        
     }
     // public IEnumerable<User> DeleteOne(Guid id)
     // {

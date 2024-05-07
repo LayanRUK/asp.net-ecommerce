@@ -46,10 +46,10 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
 
 
 
-    [HttpGet("{email}")]
-    public ProductReadDto FindOne(string email)
+    [HttpGet("{name}")]
+    public ProductReadDto FindOne(string name)
     {
-      return _productService.FindOne(email);
+      return _productService.FindOne(name);
     }
 
   }

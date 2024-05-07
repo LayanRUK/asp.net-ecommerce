@@ -28,8 +28,8 @@ public class OrderRepository : IOrderRepository
 
     public IEnumerable<Order> CreateOne(Order order)
     {
-        return _orders.Append(order);
-
+         _orders.Add(order);
+         return _orders; 
 
     }
     public IEnumerable<Order> DeleteOne(Guid id)

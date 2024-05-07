@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
 public class OrderController : BaseController
@@ -22,7 +23,6 @@ public class OrderController : BaseController
     {
         return _orderService.CreateOne(order);
 
-
     }
     [HttpDelete("{id}")]
     public IEnumerable<Order> DeleteOne(Guid id)
@@ -34,6 +34,13 @@ public class OrderController : BaseController
     {
 
         return _orderService.FindOne(id);
+    }
+
+    [HttpPost("/checkout")]
+
+    public Order Checkout(List<OrderItemCreateDto> orderItemCreateDtos)
+    {
+        return _orderService.Checkout(orderItemCreateDtos);
     }
 
 }
