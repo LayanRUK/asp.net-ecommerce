@@ -7,30 +7,39 @@ using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 public class OrderController : BaseController
 {
 
-    public IOrderService _orderService;
-    public OrderController(IOrderService orderService)
+    private IOrderService _orderService;
+    private OrderController(IOrderService orderService)
     {
         _orderService = orderService;
     }
 
     [HttpGet]
-    public IEnumerable<Order> GetAll()
+    public List<OrderReadDto> GetAll()
     {
         return _orderService.GetAll();
     }
     [HttpPost]
-    public IEnumerable<Order> CreateOne(Order order)
+     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public ActionResult <Order> CreateOne([FromBody] OrderCreatDto order)
     {
-        return _orderService.CreateOne(order);
+        
+      if (order is not null)
+      {
+        var createdorder = _orderService.CreateOne(order);
+        return CreatedAtAction(nameof(CreateOne), order);
+      }
+      return BadRequest();
 
     }
-    [HttpDelete("{id}")]
-    public IEnumerable<Order> DeleteOne(Guid id)
-    {
-        return _orderService.DeleteOne(id);
-    }
+    // [HttpDelete("{id}")]
+    // public IEnumerable<Order> DeleteOne(Guid id)
+    // {
+    //     return _orderService.DeleteOne(id);
+    // }
     [HttpGet("{id}")]
-    public IEnumerable<Order> FindOne(Guid id)
+    public OrderReadDto FindOne(Guid id)
     {
 
         return _orderService.FindOne(id);
