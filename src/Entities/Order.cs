@@ -5,8 +5,8 @@ public class Order
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
+    public User User { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public int PhoneNumber { get; set; }
     public IEnumerable<OrderItem> OrderItems { get; set; }
 
 }

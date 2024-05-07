@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
@@ -11,9 +12,11 @@ using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240507090457_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,15 +145,12 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("OrderItem", b =>
                 {
-
                     b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", "Order")
-
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_order_items_orders_order_id");
-
 
                     b.HasOne("Product", "Product")
                         .WithMany()
@@ -167,12 +167,13 @@ namespace Backend.Migrations
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", b =>
                 {
                     b.HasOne("User", "User")
-
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_orders_users_user_id");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("User", b =>

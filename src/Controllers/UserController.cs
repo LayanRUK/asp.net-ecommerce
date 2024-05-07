@@ -45,7 +45,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         {
             return _userService.FindOne(email);
         }
-         [HttpPost("/test")]
+        [HttpPost("/test")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<User> CreateOneTest([FromBody] UserCreateDto userCreate)
