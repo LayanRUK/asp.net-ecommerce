@@ -12,9 +12,9 @@ public class Order
 }
 
 
-// when you want to create an Order, you need to have a list of createOrderItemDTO
+// when you want to create an Order, you need to have a list of createOrderItemDTO    (Done )
 
-// createOrderItemDTO
+// createOrderItemDTO  (Done)
 
 //  public double Price { get; set; }
 //     public int Quantity { get; set; }
