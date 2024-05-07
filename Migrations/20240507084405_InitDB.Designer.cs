@@ -12,8 +12,8 @@ using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240506135830_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240507084405_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,12 +40,19 @@ namespace Backend.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("price");
 
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("product_id");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("integer")
                         .HasColumnName("quantity");
 
                     b.HasKey("Id")
                         .HasName("pk_order_items");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_order_items_order_id");
 
                     b.ToTable("order_items", (string)null);
                 });
@@ -131,7 +138,40 @@ namespace Backend.Migrations
                     b.HasKey("Id")
                         .HasName("pk_orders");
 
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_orders_user_id");
+
                     b.ToTable("orders", (string)null);
+                });
+
+            modelBuilder.Entity("OrderItem", b =>
+                {
+                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_order_items_orders_order_id");
+                });
+
+            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", b =>
+                {
+                    b.HasOne("User", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_orders_users_user_id");
+                });
+
+            modelBuilder.Entity("User", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }
