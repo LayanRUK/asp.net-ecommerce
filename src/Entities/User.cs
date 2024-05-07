@@ -2,6 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 
 
@@ -16,6 +17,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.Enums;
         public string Password { get; set; }
         [Required]   
         public Role Role { get; set; } = Role.customer;
+        public IEnumerable<Order> Orders { get; set; }
     }
 
 
