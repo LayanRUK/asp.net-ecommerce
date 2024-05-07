@@ -34,13 +34,12 @@ public class OrderRepository : IOrderRepository
     }
     public IEnumerable<Order> DeleteOne(Guid id)
     {
-       _orders.Where(u => u.Id != id);
+        _orders.Where(u => u.Id != id);
         return _orders;
     }
 
     public IEnumerable<Order> FindOne(Guid id)
     {
-         _orders.Where(u => u.Id != id);
         return _orders;
     }
 

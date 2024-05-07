@@ -38,10 +38,4 @@ public class OrderController : BaseController
         return _orderService.FindOne(id);
     }
 
-
-    //   public IEnumerable<Order> DeleteOne(string id){
-    //  _orderService=_orderService.Where(u => u.Id != id);
-    //  return _orderService;
-    // }
-
 }
