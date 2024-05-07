@@ -26,21 +26,22 @@ public class OrderRepository : IOrderRepository
         return _orders;
     }
 
-    public IEnumerable<Order> CreateOne(Order order)
+    public Order CreateOne(Order order)
     {
          _orders.Add(order);
-         return _orders; 
+         _databaseContext.SaveChanges();
+         return order; 
 
     }
-    public IEnumerable<Order> DeleteOne(Guid id)
-    {
-        _orders.Where(u => u.Id != id);
-        return _orders;
-    }
+    // public IEnumerable<Order> DeleteOne(Guid id)
+    // {
+    //     _orders.Where(u => u.Id != id);
+    //     return _orders;
+    // }
 
-    public IEnumerable<Order> FindOne(Guid id)
+    public Order FindOne(Guid id)
     {
-        return _orders;
+      return _orders.FirstOrDefault(O=> O.Id == id);
     }
 
 

@@ -1,3 +1,4 @@
+using AutoMapper;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
@@ -8,31 +9,45 @@ public class OrderService : IOrderService
     private IOrderRepository _orderRepository;
     private IOrderItemRepository _orderItemRepository;
 
-    public OrderService(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository )
+    private IMapper _mapper;
+
+    public OrderService(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository , IMapper mapper)
     {
         _orderRepository = orderRepository;
         _orderItemRepository = orderItemRepository; 
+        _mapper = mapper;
     }
-    public IEnumerable<Order> GetAll()
-    {
-        return _orderRepository.GetAll();
-    }
+    public List<OrderReadDto> GetAll()
 
-    public IEnumerable<Order> CreateOne(Order order)
     {
-        return _orderRepository.CreateOne(order);
+            var orders = _orderRepository.GetAll();
+            var orderRead = orders.Select(_mapper.Map<OrderReadDto>);
+            return orderRead.ToList();
 
-    }
 
-    public IEnumerable<Order> DeleteOne(Guid id)
-    {
-        return _orderRepository.DeleteOne(id);
     }
 
-    public IEnumerable<Order> FindOne(Guid id)
+    public Order CreateOne(OrderCreatDto orderCreatDto)
+    {
+       
+
+          var order = _mapper.Map<Order>(orderCreatDto);
+
+            return _orderRepository.CreateOne(order);
+
+    }
+
+    // public IEnumerable<Order> DeleteOne(Guid id)
+    // {
+    //     return _orderRepository.DeleteOne(id);
+    // }
+
+    public OrderReadDto FindOne(Guid id)
     {
 
-        return _orderRepository.FindOne(id);
+           var order = _orderRepository.FindOne(id);
+            var orderRead = _mapper.Map<OrderReadDto>(order);
+            return orderRead;
     }
 
     public Order Checkout(List<OrderItemCreateDto> orderItemCreateDtos)

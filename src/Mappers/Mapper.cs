@@ -32,6 +32,12 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Mappers
             CreateMap<OrderItemCreateDto, OrderItem>();
             CreateMap<OrderItem, OrderItemCreateDto>();
 
+
+            CreateMap<Order, OrderReadDto>();
+            CreateMap<OrderReadDto, Order>();
+            CreateMap<OrderCreatDto, Order>();
+            CreateMap<Order, OrderCreatDto>();
+
         }
     }
 }
