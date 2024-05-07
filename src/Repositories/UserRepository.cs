@@ -39,6 +39,8 @@ public class UserRepository : IUserRepository
     // }
     public User FindOne(string email)
     {
+
+        
          return  _users.FirstOrDefault(u => u.Email == email);
    
     }

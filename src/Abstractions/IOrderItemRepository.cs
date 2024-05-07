@@ -1,12 +1,12 @@
+
+
+namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 public interface IOrderItemRepository
 {
-
     public IEnumerable<OrderItem> GetAll();
+    public OrderItem CreteOne(OrderItem order_item);
 
-    public IEnumerable<OrderItem> CreteOne(OrderItem order_item);
-
-    public IEnumerable<OrderItem> DeleteOne(Guid id);
-
-    public IEnumerable<OrderItem> FindOne(Guid id);
+    // public IEnumerable<OrderItem> DeleteOne(Guid id);
+    public OrderItem FindOne(Guid id);
 
 }
