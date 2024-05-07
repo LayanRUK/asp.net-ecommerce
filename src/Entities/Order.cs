@@ -7,7 +7,6 @@ public class Order
     public Guid UserId { get; set; }
     public User User { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
-
     public IEnumerable<OrderItem> OrderItems { get; set; }
 
 }

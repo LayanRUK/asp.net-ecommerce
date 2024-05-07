@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+
 using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 
 using Microsoft.EntityFrameworkCore;
@@ -21,18 +22,24 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 
         private IConfiguration _config;
 
-       public DatabaseContext( IConfiguration config) 
+
+
+        public DatabaseContext( IConfiguration config) 
         {
             _config = config;
         }
+
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Database={_config["Db:Database"]}")
             .UseSnakeCaseNamingConvention();
             }
 
+
+
     }
     }
     
+
 
 

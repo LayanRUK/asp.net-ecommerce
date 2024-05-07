@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 
-
 public class User
 {
     public Guid Id { get; set; }
@@ -19,6 +18,7 @@ public class User
     [Required]
     public Role Role { get; set; } = Role.customer;
 }
+
 
 
 
