@@ -30,9 +30,6 @@ public class OrderItemService : IOrderItemService
     }
 
 
-
-
-
     //     public IEnumerable<OrderItem> CreateOne(OrderItem order_item)
     //     {
 
@@ -53,7 +50,8 @@ public class OrderItemService : IOrderItemService
 
     public OrderItem CreateOne(OrderItemCreateDto order_item)
     {
-        var orderItem = new OrderItem();
+        var orderItem = _mapper.Map<OrderItem>(order_item); 
+        _order_itemRepository.CreteOne(orderItem); 
 
         return orderItem;
     }

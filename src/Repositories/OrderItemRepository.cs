@@ -24,7 +24,7 @@ public class OrderItemRepository : IOrderItemRepository
     public OrderItem CreteOne(OrderItem order_item)
     {
    
-         _orderItems.Append(order_item);
+         _orderItems.Add(order_item);
 
               return order_item;
 
