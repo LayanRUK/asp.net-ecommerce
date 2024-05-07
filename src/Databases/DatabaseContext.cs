@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
+using Npgsql;
 
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Databases;
@@ -23,17 +24,19 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases;
 
         private IConfiguration _config;
 
-        public DatabaseContext(DbContextOptions options,  IConfiguration config) : base(options)
+        public DatabaseContext( IConfiguration config) 
+
         {
             _config = config;
-
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
 
+
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Database={_config["Db:Database"]}")
-           .UseSnakeCaseNamingConvention();
-        }
+            .UseSnakeCaseNamingConvention();
+            }
+
+
 
     
     }

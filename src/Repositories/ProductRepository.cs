@@ -16,7 +16,7 @@ public class ProductRepository : IProductRepository
   public ProductRepository(DatabaseContext databaseContext)
 
   {
-    _databaseContext = databaseContext; 
+    _databaseContext = databaseContext;
     _products = _databaseContext.Products;
   }
 
@@ -24,19 +24,32 @@ public class ProductRepository : IProductRepository
   {
     return _products;
   }
-  public IEnumerable<Product> CreateOne(Product product)
+
+
+  public Product CreateOne(Product product)
   {
-    return _products.Append(product);
+
+    _products.Add(product);
+
+    return product;
   }
-  public IEnumerable<Product> DeleteOne(Guid id)
+
+
+
+  // public IEnumerable<Product> DeleteOne(Guid id)
+  // {
+  //   // find item is exist or not , if yes, you will have foundItem 
+  //   // Remove() _products.Remove(foundItem)
+  // _products.Where(u => u.Id != id);
+  //   return _products;
+  // }
+
+
+
+  public Product FindOne(string name)
   {
-  _products.Where(u => u.Id != id);
-    return _products;
-  }
-  public IEnumerable<Product> FindOne(Guid id)
-  {
-_products.Where(u => u.Id != id);
-    return _products;
+    return _products.FirstOrDefault(P => P.Name == name);
+
   }
 
 }

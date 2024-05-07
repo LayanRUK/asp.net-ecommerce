@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDB : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,8 +46,7 @@ namespace Backend.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    phone_number = table.Column<int>(type: "integer", nullable: false)
+                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,8 +66,8 @@ namespace Backend.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     price = table.Column<double>(type: "double precision", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
-                    order_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    product_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    order_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,12 +78,23 @@ namespace Backend.Migrations
                         principalTable: "orders",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_order_items_products_product_id",
+                        column: x => x.product_id,
+                        principalTable: "products",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "ix_order_items_order_id",
                 table: "order_items",
                 column: "order_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_order_items_product_id",
+                table: "order_items",
+                column: "product_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_orders_user_id",
@@ -99,10 +109,10 @@ namespace Backend.Migrations
                 name: "order_items");
 
             migrationBuilder.DropTable(
-                name: "products");
+                name: "orders");
 
             migrationBuilder.DropTable(
-                name: "orders");
+                name: "products");
 
             migrationBuilder.DropTable(
                 name: "users");
