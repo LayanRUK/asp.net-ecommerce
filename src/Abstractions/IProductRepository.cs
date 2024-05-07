@@ -6,9 +6,12 @@ public interface IProductRepository
 {
     public IEnumerable<Product> GetAll();
 
-    public IEnumerable<Product> CreateOne(Product product);
-    public IEnumerable<Product> DeleteOne(Guid id);
-    public IEnumerable<Product> FindOne(Guid id);
+    public Product CreateOne(Product product);
+
+    // public IEnumerable<Product> DeleteOne(Guid id);
+
+    public Product FindOne(string name);
+
 
 
 }
