@@ -108,7 +108,7 @@ namespace Backend.Migrations
                         .HasColumnType("text")
                         .HasColumnName("password");
 
-                    b.Property<Role>("Role")
+                    b.Property<Role>("role")
                         .HasColumnType("role")
                         .HasColumnName("role");
 
@@ -130,7 +130,7 @@ namespace Backend.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
 
                     b.Property<Guid>("UserId")
@@ -148,7 +148,7 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("OrderItem", b =>
                 {
-                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", "Order")
+                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -161,8 +161,6 @@ namespace Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_order_items_products_product_id");
-
-                    b.Navigation("Order");
 
                     b.Navigation("Product");
                 });
