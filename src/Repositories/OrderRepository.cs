@@ -28,9 +28,9 @@ public class OrderRepository : IOrderRepository
 
     public Order CreateOne(Order order)
     {
-         _orders.Add(order);
-         _databaseContext.SaveChanges();
-         return order; 
+        _orders.Add(order);
+        _databaseContext.SaveChanges();
+        return order;
 
     }
     // public IEnumerable<Order> DeleteOne(Guid id)
@@ -41,7 +41,7 @@ public class OrderRepository : IOrderRepository
 
     public Order FindOne(Guid id)
     {
-      return _orders.FirstOrDefault(O=> O.Id == id);
+        return _orders.FirstOrDefault(O => O.Id == id);
     }
 
 

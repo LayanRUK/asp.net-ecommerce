@@ -24,43 +24,64 @@ public class UserService : IUserService
 
     public List<UserReadDto> GetAll()
     {
-        
-       var users =   _userRepository.GetAll();
-       var userRead = users.Select(_mapper.Map<UserReadDto>);
-       return userRead.ToList();
+
+        var users = _userRepository.GetAll();
+        var userRead = users.Select(_mapper.Map<UserReadDto>);
+        return userRead.ToList();
     }
-    public UserReadDto CreateOne(UserCreateDto userCreateDto)
+    public UserReadDto SignUp(UserCreateDto userCreateDto)
     {
 
         // map userCreateDto to user 
-        var user  = _mapper.Map<User>(userCreateDto); 
-        
+        var user = _mapper.Map<User>(userCreateDto);
+
         User? foundUser = _userRepository.FindOne(user.Email);
-        if ( foundUser is not null )
+        if (foundUser is not null)
         {
-           return null;  
+            return null;
         }
-        Console.WriteLine($"Hash password");
-        
+
+
         byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);
         PasswordUtils.HashPassword(user.Password, out string hashedPassword, pepper);
         user.Password = hashedPassword;
-        Console.WriteLine($"{hashedPassword}");
-        
-          var userCreate = _userRepository.CreateOne(user);
-          return _mapper.Map<UserReadDto>(userCreate); 
-        
+
+
+        User userCreate = _userRepository.CreateOne(user);
+        UserReadDto userRead = _mapper.Map<UserReadDto>(userCreate);
+        return userRead;
+
     }
     // public IEnumerable<User> DeleteOne(Guid id)
     // {
     //     return _userRepository.DeleteOne(id);
     // }
-     public UserReadDto FindOne(string email)
+    public UserReadDto FindOne(string email)
     {
         var user = _userRepository.FindOne(email);
         var userRead = _mapper.Map<UserReadDto>(user);
         return userRead;
     }
 
+
+    public UserReadDto? SignIn(UserSignInDto userSign)
+    {
+
+        User? user = _userRepository.FindOne(userSign.Email);
+        if (user is null) return null;
+        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);
+
+        bool isCorrectPass = PasswordUtils.VerifyPassword(userSign.Password, user.Password, pepper);
+        if (!isCorrectPass) return null;
+
+
+
+        UserReadDto userRead = _mapper.Map<UserReadDto>(user);
+
+        return userRead;
+
+
+
+    }
 
 }

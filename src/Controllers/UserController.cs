@@ -21,22 +21,47 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         {
             return _userService.GetAll();
         }
-        [HttpPost]
+        [HttpPost("signup")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<UserReadDto> CreateOne([FromBody] UserCreateDto user)
+        public ActionResult<UserReadDto> SingUp([FromBody] UserCreateDto user)
         {
             // always return only one i create it 
             if (user is not null)
             {
                 Console.WriteLine($"Receive user data");
-                
 
-                var createdUser = _userService.CreateOne(user);
-                return CreatedAtAction(nameof(CreateOne), user);
+
+                var createdUser = _userService.SignUp(user);
+                return CreatedAtAction(nameof(SingUp), createdUser);
             }
             return BadRequest();
         }
+
+
+        [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<UserReadDto> SignIn([FromBody] UserSignInDto user)
+        {
+            // always return only one i create it 
+            if (user is not null)
+            {
+                UserReadDto? userRead = _userService.SignIn(user);
+                if (userRead is null)
+                {
+                    return BadRequest();
+                }
+                return Ok(userRead);
+            }
+            return BadRequest();
+        }
+
+
+
+
+
+
         // [HttpDelete("{id}")]
         // public IEnumerable<User> DeleteOne(Guid id)
         // {
@@ -47,20 +72,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         {
             return _userService.FindOne(email);
         }
-        [HttpPost("/test")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> CreateOneTest([FromBody] UserCreateDto userCreate)
-        {
-            // always return only one i create it 
-            if (userCreate is not null)
-            {
 
-                var createdUser = _userService.CreateOne(userCreate);
-                return CreatedAtAction(nameof(CreateOne), userCreate);
-            }
-            return BadRequest();
-        }
 
     }
 }
