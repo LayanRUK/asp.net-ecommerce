@@ -28,7 +28,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Services
             var products = _productRepository.GetAll();
             var productRead = products.Select(_mapper.Map<ProductReadDto>);
             return productRead.ToList();
- 
+
         }
 
         public Product CreateOne(ProductCreateDto productCreateDto)

@@ -8,7 +8,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 public class OrderItemRepository : IOrderItemRepository
 {
 
-    private DbSet<OrderItem> _orderItems {get;set;}
+    private DbSet<OrderItem> _orderItems { get; set; }
     private DatabaseContext _databaseContext;
 
     public OrderItemRepository(DatabaseContext databaseContext)
@@ -23,10 +23,10 @@ public class OrderItemRepository : IOrderItemRepository
 
     public OrderItem CreteOne(OrderItem order_item)
     {
-   
-         _orderItems.Add(order_item);
 
-              return order_item;
+        _orderItems.Add(order_item);
+
+        return order_item;
 
     }
 
@@ -40,10 +40,10 @@ public class OrderItemRepository : IOrderItemRepository
 
     public OrderItem FindOne(Guid id)
     {
-  
 
 
-   return _orderItems.FirstOrDefault(u => u.Id == id);
+
+        return _orderItems.FirstOrDefault(u => u.Id == id);
 
 
     }

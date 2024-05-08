@@ -1,16 +1,20 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 
 #nullable disable
 
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class dbinit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:Enum:role", "customer,admin");
+
             migrationBuilder.CreateTable(
                 name: "products",
                 columns: table => new
@@ -33,7 +37,7 @@ namespace Backend.Migrations
                     name = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "text", nullable: false),
                     password = table.Column<string>(type: "text", nullable: false),
-                    role = table.Column<int>(type: "integer", nullable: false)
+                    role = table.Column<Role>(type: "role", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,6 +104,12 @@ namespace Backend.Migrations
                 name: "ix_orders_user_id",
                 table: "orders",
                 column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_users_email",
+                table: "users",
+                column: "email",
+                unique: true);
         }
 
         /// <inheritdoc />

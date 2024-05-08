@@ -11,19 +11,19 @@ public class UserRepository : IUserRepository
     private DatabaseContext _databaseContext;
     public UserRepository(DatabaseContext databaseContext)
     {
-        _databaseContext = databaseContext; 
+        _databaseContext = databaseContext;
         _users = _databaseContext.Users;
     }
-    public IEnumerable<User>GetAll()
+    public IEnumerable<User> GetAll()
     {
         return _users;
     }
     public User CreateOne(User user)
-    { 
+    {
         _users.Add(user);
-        _databaseContext.SaveChanges(); 
+        _databaseContext.SaveChanges();
         return user;
-    
+
     }
     // public IEnumerable<User> DeleteOne(Guid id)
     // {
@@ -33,8 +33,8 @@ public class UserRepository : IUserRepository
     public User FindOne(string email)
     {
 
-        
-         return  _users.FirstOrDefault(u => u.Email == email);
-   
+
+        return _users.FirstOrDefault(u => u.Email == email);
+
     }
 }

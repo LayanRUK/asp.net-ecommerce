@@ -18,21 +18,21 @@ public class OrderItemController : BaseController
     }
 
     [HttpPost]
-  
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<OrderItem> CreateOne([FromBody ] OrderItemCreateDto order_item)
+
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public ActionResult<OrderItem> CreateOne([FromBody] OrderItemCreateDto order_item)
     {
-        
-      if (order_item is not null)
-      {
-        var createdorderItem = _order_ItemService.CreateOne(order_item);
-         return   CreatedAtAction(nameof(CreateOne), order_item);
+
+        if (order_item is not null)
+        {
+            var createdorderItem = _order_ItemService.CreateOne(order_item);
+            return CreatedAtAction(nameof(CreateOne), order_item);
+        }
+
+        return BadRequest();
     }
-    
-         return BadRequest();
-      }
-     
+
 
 
     // [HttpDelete("{id}")]
