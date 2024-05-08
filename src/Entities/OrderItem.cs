@@ -11,6 +11,4 @@ public class OrderItem
     public Guid OrderId { get; set; }
 
     public Product Product { get; set; }
-    public Order Order { get; set; }
-
 }
