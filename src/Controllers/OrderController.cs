@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
@@ -18,26 +20,7 @@ public class OrderController : BaseController
     {
         return _orderService.GetAll();
     }
-    [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
-    public ActionResult<Order> CreateOne([FromBody] OrderCreatDto order)
-    {
-
-        if (order is not null)
-        {
-            var createdorder = _orderService.CreateOne(order);
-            return CreatedAtAction(nameof(CreateOne), order);
-        }
-        return BadRequest();
-
-    }
-    // [HttpDelete("{id}")]
-    // public IEnumerable<Order> DeleteOne(Guid id)
-    // {
-    //     return _orderService.DeleteOne(id);
-    // }
+ 
     [HttpGet("{id}")]
     public OrderReadDto FindOne(Guid id)
     {
@@ -45,11 +28,12 @@ public class OrderController : BaseController
         return _orderService.FindOne(id);
     }
 
+    [Authorize(Roles = "Admin,Customer")]
     [HttpPost("checkout")]
-
     public Order Checkout(List<OrderItemCreateDto> orderItemCreateDtos)
     {
-        return _orderService.Checkout(orderItemCreateDtos);
+        string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        return _orderService.Checkout(orderItemCreateDtos, userId);
     }
 
 }
