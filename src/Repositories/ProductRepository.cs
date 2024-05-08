@@ -30,7 +30,7 @@ public class ProductRepository : IProductRepository
   {
 
     _products.Add(product);
-      _databaseContext.SaveChanges(); 
+    _databaseContext.SaveChanges();
 
     return product;
   }

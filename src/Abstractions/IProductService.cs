@@ -8,6 +8,8 @@ public interface IProductService
   public List<ProductReadDto> GetAll();
 
   public Product CreateOne(ProductCreateDto product);
+
+
   // public IEnumerable<Product> DeleteOne(Guid id);
   public ProductReadDto FindOne(string name);
 
