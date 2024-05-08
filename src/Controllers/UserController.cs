@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
@@ -17,6 +18,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             _userService = userService;
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public List<UserReadDto> GetAll()
         {
             return _userService.GetAll();
@@ -42,17 +44,17 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<UserReadDto> SignIn([FromBody] UserSignInDto user)
+        public ActionResult<string> SignIn([FromBody] UserSignInDto user)
         {
             // always return only one i create it 
             if (user is not null)
             {
-                UserReadDto? userRead = _userService.SignIn(user);
-                if (userRead is null)
+                string  Token = _userService.SignIn(user);
+                if (Token is null)
                 {
                     return BadRequest();
                 }
-                return Ok(userRead);
+                return Ok(Token);
             }
             return BadRequest();
         }
