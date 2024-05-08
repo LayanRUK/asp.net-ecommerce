@@ -50,29 +50,33 @@ public class OrderService : IOrderService
         return orderRead;
     }
 
-    public Order Checkout(List<OrderItemCreateDto> orderItemCreateDtos)
+    public Order Checkout(List<OrderItemCreateDto> orderItemCreateDtos, string userId)
     {
         // create an order 
 
-        var order = new Order(); 
-          order.UserId = new Guid("3debd6e2-1220-4e86-8bc2-29dde97e89c2");
+        var order = new Order
+        {
+            UserId = new Guid(userId)
+        };
         // save order in order table 
-         _orderRepository.CreateOne(order); 
+        _orderRepository.CreateOne(order); 
         // for loop in the list of order item create Dto
-        Console.WriteLine($"{order.Id}");
-        
-        foreach(var item in orderItemCreateDtos)
+        Console.WriteLine($"ORDER ID: {order.Id}");
+        Console.WriteLine($"USER ID: {userId}");
 
-        var order = new Order();
+    
+
         // for loop in the list of order item create Dto 
         foreach (var item in orderItemCreateDtos)
 
         {
-            var orderItem = new OrderItem();
-            orderItem.OrderId = order.Id;
-            orderItem.ProductId = item.ProductId;
-            orderItem.Price = item.Price;
-            orderItem.Quantity = item.Quantity;
+            var orderItem = new OrderItem
+            {
+                OrderId = order.Id,
+                ProductId = item.ProductId,
+                Price = item.Price,
+                Quantity = item.Quantity
+            };
             _orderItemRepository.CreteOne(orderItem);
         }
 
@@ -82,10 +86,6 @@ public class OrderService : IOrderService
        
         return order; 
 
-        order.UserId = Guid.NewGuid();
-        // save order in order table 
-        _orderRepository.CreateOne(order);
-        return order;
 
     }
     //Add Check for Prodect and the quantity.

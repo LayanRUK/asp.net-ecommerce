@@ -25,7 +25,7 @@ public class OrderItemRepository : IOrderItemRepository
     {
 
         _orderItems.Add(order_item);
-
+        _databaseContext.SaveChanges();
         return order_item;
 
     }

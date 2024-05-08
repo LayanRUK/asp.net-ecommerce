@@ -85,7 +85,8 @@ public class UserService : IUserService
                      {
             new Claim(ClaimTypes.Name, user.Name),
             new Claim(ClaimTypes.Role, user.role.ToString()),
-            new Claim(ClaimTypes.Email, user.Email)
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
         };
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

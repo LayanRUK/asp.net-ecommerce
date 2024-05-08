@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -31,7 +32,8 @@ public class OrderController : BaseController
     [HttpPost("checkout")]
     public Order Checkout(List<OrderItemCreateDto> orderItemCreateDtos)
     {
-        return _orderService.Checkout(orderItemCreateDtos);
+        string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        return _orderService.Checkout(orderItemCreateDtos, userId);
     }
 
 }
