@@ -8,7 +8,9 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions
     public interface IUserService
     {
         public List<UserReadDto> GetAll();
-        public UserReadDto CreateOne(UserCreateDto user);
+        public UserReadDto SignUp(UserCreateDto user);
+
+        public String SignIn(UserSignInDto user);
         public UserReadDto FindOne(string email);
         // public IEnumerable<User> DeleteOne(Guid id);
         // FindOne

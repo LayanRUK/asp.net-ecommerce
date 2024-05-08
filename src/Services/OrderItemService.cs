@@ -50,8 +50,8 @@ public class OrderItemService : IOrderItemService
 
     public OrderItem CreateOne(OrderItemCreateDto order_item)
     {
-        var orderItem = _mapper.Map<OrderItem>(order_item); 
-        _order_itemRepository.CreteOne(orderItem); 
+        var orderItem = _mapper.Map<OrderItem>(order_item);
+        _order_itemRepository.CreteOne(orderItem);
 
         return orderItem;
     }
