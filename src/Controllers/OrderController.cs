@@ -8,7 +8,7 @@ public class OrderController : BaseController
 {
 
     private IOrderService _orderService;
-    private OrderController(IOrderService orderService)
+    public OrderController(IOrderService orderService)
     {
         _orderService = orderService;
     }
@@ -45,7 +45,7 @@ public class OrderController : BaseController
         return _orderService.FindOne(id);
     }
 
-    [HttpPost("/checkout")]
+    [HttpPost("checkout")]
 
     public Order Checkout(List<OrderItemCreateDto> orderItemCreateDtos)
     {
