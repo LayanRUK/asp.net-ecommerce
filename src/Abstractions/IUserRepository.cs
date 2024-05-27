@@ -13,4 +13,8 @@ public interface IUserRepository
   public User? FindOne(string email);
 
   // public IEnumerable<User> DeleteOne(Guid id);
+  public bool DeleteOne(User user);
+  public bool UpdateOne(User updateObject);
+
+  public User FindOneByEmail(string email);
 }

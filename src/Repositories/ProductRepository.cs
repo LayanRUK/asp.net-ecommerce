@@ -20,12 +20,25 @@ public class ProductRepository : IProductRepository
     _products = _databaseContext.Products;
   }
 
-  public IEnumerable<Product> GetAll()
+  // public IEnumerable<Product> GetAll()
+  // {
+  //   return _products;
+  // }
+
+public IEnumerable<Product> GetAll(GetAllOptions getAllOptions)
   {
-    return _products;
+    if (getAllOptions.Search is null)
+    {
+      return _products.Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArray();
+    }
+    else
+    {
+      return _products
+              .Where(p => p.Name.ToLower().Contains(getAllOptions.Search.ToLower()))
+              .Skip(getAllOptions.Offset)
+              .Take(getAllOptions.Limit).ToArray();
+    }
   }
-
-
   public Product CreateOne(Product product)
   {
 
@@ -35,7 +48,12 @@ public class ProductRepository : IProductRepository
     return product;
   }
 
-
+  public bool DeleteOne(Product deleteObject)
+  {
+    _products.Remove(deleteObject);
+    _databaseContext.SaveChanges();
+    return true;
+  }
 
   // public IEnumerable<Product> DeleteOne(Guid id)
   // {
@@ -50,7 +68,21 @@ public class ProductRepository : IProductRepository
   public Product FindOne(string name)
   {
     return _products.FirstOrDefault(P => P.Name == name);
-
   }
+  public bool UpdateOne(Product updateObject)
+  {
+    _products.Update(updateObject);
+    _databaseContext.SaveChanges();
+    return true;
+  }
+
+  // public IEnumerable<Product> FindAll(int limit, int offset)
+  //   {
+  //       if (limit == 0 && offset == 0)
+  //       {
+  //           return _databaseContext.Products;
+  //       }
+  //       return _databaseContext.Products.Skip(offset).Take(limit);
+  //   }
 
 }

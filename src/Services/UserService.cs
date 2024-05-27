@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
@@ -69,8 +70,8 @@ public class UserService : IUserService
 
     public String SignIn(UserSignInDto userSign)
     {
-
-        User? user = _userRepository.FindOne(userSign.Email);
+User? user = _userRepository.FindOneByEmail(userSign.Email);
+        // User? user = _userRepository.FindOne(userSign.Email);
         if (user is null) return null;
         byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);
 
@@ -102,5 +103,35 @@ public class UserService : IUserService
 
 
     }
+    public ActionResult<bool> DeleteOne(string name )
+        {
+            var foundUser = _userRepository.FindOne(name);
+            if (foundUser is null)
+            {
+                Console.WriteLine($"user is null in service file");
+                return false;
+            }
+               Console.WriteLine($"user is not null in service file");
+            return _userRepository.DeleteOne(foundUser);
+        }
+
+        public bool UpdateOne(string name, UserUpdateDto updateDto)
+        {
+            var foundUser = _userRepository.FindOne(name);
+             Console.WriteLine($"user is not null in service file");
+            if (foundUser == null)
+            {
+                return false;
+            }
+            foreach (var property in updateDto.GetType().GetProperties())
+            {
+                if (property.GetValue(updateDto) is null)
+                {
+                    property.SetValue(updateDto, foundUser.GetType().GetProperty(property.Name).GetValue(foundUser));
+                }
+            }
+            var mappedUser = _mapper.Map(updateDto, foundUser);
+            return _userRepository.UpdateOne(mappedUser);
+        }
 
 }

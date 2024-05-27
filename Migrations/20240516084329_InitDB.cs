@@ -7,7 +7,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class dbinit : Migration
+    public partial class InitDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,6 +21,7 @@ namespace Backend.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
                     price = table.Column<int>(type: "integer", nullable: false),
                     image = table.Column<string>(type: "text", nullable: false)
                 },
@@ -104,6 +105,12 @@ namespace Backend.Migrations
                 name: "ix_orders_user_id",
                 table: "orders",
                 column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_products_name",
+                table: "products",
+                column: "name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_users_email",

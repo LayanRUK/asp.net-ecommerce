@@ -14,13 +14,17 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
     }
 
 
-    [HttpGet]
-    public List<ProductReadDto> GetAll()
+    // [HttpGet]
+    // public List<ProductReadDto> GetAll()
+    // {
+    //   return _productService.GetAll();
+
+    // }
+[HttpGet]
+    public List<ProductReadDto> GetAll ( [FromQuery] GetAllOptions getAllOptions )
     {
-      return _productService.GetAll();
-
+      return _productService.GetAll(getAllOptions);
     }
-
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -44,13 +48,33 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
 
     // }
 
-
+[HttpDelete("{name}")]
+        public  ActionResult<bool> DeleteOne([FromRoute] string name)
+        {
+            var deleted =  _productService.DeleteOne(name);
+            return Ok(deleted);
+        }
 
     [HttpGet("{name}")]
     public ProductReadDto FindOne(string name)
     {
       return _productService.FindOne(name);
     }
+
+    [HttpPatch("{name}")]
+        public ActionResult<bool> UpdateOne([FromRoute] string name , [FromBody] ProductUpdateDto updateDto)
+        {
+            var updated =  _productService.UpdateOne (name, updateDto);
+            return Ok(updated);
+        }
+    //     [HttpGet]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+    // public ActionResult<IEnumerable<ProductReadDto>> FindAll([FromQuery(Name = "searchBy")] string searchBy)
+    // {
+    //     return Ok(_productService.FindAll());
+    // }
 
   }
 }

@@ -18,6 +18,8 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Mappers
             CreateMap<UserReadDto, User>();
             CreateMap<UserCreateDto, User>();
             CreateMap<User, UserCreateDto>();
+            CreateMap<UserUpdateDto, User>()
+            .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
 
             CreateMap<Product, ProductReadDto>();
             CreateMap<ProductReadDto, Product>();
@@ -38,6 +40,8 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Mappers
             CreateMap<OrderCreatDto, Order>();
             CreateMap<Order, OrderCreatDto>();
 
+CreateMap<ProductUpdateDto, Product>()
+             .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
         }
     }
 }

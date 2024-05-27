@@ -22,28 +22,13 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases;
         public DbSet<Product> Products {get; set;}
         public DbSet<User> Users { get; set; }
 
-
-        private IConfiguration _config;
-
-        public DatabaseContext( IConfiguration config) 
-
-        {
-            _config = config;
-        }
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Database={_config["Db:Database"]}");
-            dataSourceBuilder.MapEnum<Role>();
-            var dataSource =  dataSourceBuilder.Build();
-            optionsBuilder.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
-            }
-            protected override void OnModelCreating( ModelBuilder modelBuilder){
-             modelBuilder.HasPostgresEnum<Role>();
-          }
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
 
-    
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasPostgresEnum<Role>();
     }
-
-
+    }
 
 

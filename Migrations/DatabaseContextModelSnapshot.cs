@@ -66,6 +66,11 @@ namespace Backend.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("text")
@@ -82,6 +87,10 @@ namespace Backend.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_products");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ix_products_name");
 
                     b.ToTable("products", (string)null);
                 });
